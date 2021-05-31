@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>User stats</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.0/dist/chart.min.js"></script>
+    </head>
+    <body>
+        <h1>User stats</h1>
+        <form action="{% url 'index' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="input_file">
+            <textarea name="input_text"></textarea>
+            <input type="submit" value="Submit">
+        </form>
+        <div id="fem-percent">{{ female_percent }}</div>
+        <div id="male-percent">{{ male_percent }}</div>
+        <div id="first-am">{{ first_am_percent }}</div>
+        <div id="first-nz">{{ first_nz_percent }}</div>
+        <div id="last-am">{{ last_am_percent }}</div>
+        <div id="last-nz">{{ last_nz_percent }}</div>
+        <div id="population">{{ top_ten }}</div>
+        <div id="female-population">{{ female_per_state }}</div>
+        <div id="male-population">{{ male_per_state }}</div>
+        <div id="ages">{{ age_range }}</div>
+
+        <canvas id="gender-ratio" width="400" height="50"></canvas>
+        <canvas id="top-ten-pop" width="400" height="400"></canvas>
+        <canvas id="gender-per-state" width="400" height="300"></canvas>
+        <canvas id="age-range" width="400" height="300"></canvas>
+        <canvas id="name-ratio" width="400" height="300"></canvas>
+
+        <script type="text/javascript" src="{% static 'stats/main.js' %}"></script>
+    </body>
+</html>
