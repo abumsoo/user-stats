@@ -3,34 +3,89 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
         <title>User stats</title>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.0/dist/chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'stats/styles.css' %}">
+
     </head>
     <body>
-        <h1>User stats</h1>
-        <form action="{% url 'index' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="input_file">
-            <textarea name="input_text"></textarea>
-            <input type="submit" value="Submit">
-        </form>
-        <div id="fem-percent">{{ female_percent }}</div>
-        <div id="male-percent">{{ male_percent }}</div>
-        <div id="first-am">{{ first_am_percent }}</div>
-        <div id="first-nz">{{ first_nz_percent }}</div>
-        <div id="last-am">{{ last_am_percent }}</div>
-        <div id="last-nz">{{ last_nz_percent }}</div>
-        <div id="population">{{ top_ten }}</div>
-        <div id="female-population">{{ female_per_state }}</div>
-        <div id="male-population">{{ male_per_state }}</div>
-        <div id="ages">{{ age_range }}</div>
+        <div class="container">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1">User stats</span>
+                </div>
+            </nav>
+            <div class="row">
+                <form action="{% url 'index' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">File data input</label>
+                        <input class="form-control" type="file" id="formFile" name="input_file">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Text data input</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="input_text"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Submit data</button>
+                    </div>
+                </form>
+                <div id="fem-percent">{{ female_percent }}</div>
+                <div id="male-percent">{{ male_percent }}</div>
+                <div id="first-am">{{ first_am_percent }}</div>
+                <div id="first-nz">{{ first_nz_percent }}</div>
+                <div id="last-am">{{ last_am_percent }}</div>
+                <div id="last-nz">{{ last_nz_percent }}</div>
+                <div id="population">{{ top_ten }}</div>
+                <div id="female-population">{{ female_per_state }}</div>
+                <div id="male-population">{{ male_per_state }}</div>
+                <div id="ages">{{ age_range }}</div>
+            </div>
 
-        <canvas id="gender-ratio" width="400" height="50"></canvas>
-        <canvas id="top-ten-pop" width="400" height="400"></canvas>
-        <canvas id="gender-per-state" width="400" height="300"></canvas>
-        <canvas id="age-range" width="400" height="300"></canvas>
-        <canvas id="name-ratio" width="400" height="300"></canvas>
+            <br>
+            <div class="row">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="gender-tab" data-bs-toggle="tab" data-bs-target="#gender" type="button" role="tab" aria-controls="gender" aria-selected="true">Gender ratio</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="states-tab" data-bs-toggle="tab" data-bs-target="#states" type="button" role="tab" aria-controls="states" aria-selected="false">State populations</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="state-gender-tab" data-bs-toggle="tab" data-bs-target="#state-gender" type="button" role="tab" aria-controls="state-gender" aria-selected="false">Gender ratio per state</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="names-tab" data-bs-toggle="tab" data-bs-target="#names" type="button" role="tab" aria-controls="names" aria-selected="false">Names: A-M vs N-Z</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="age-pop-tab" data-bs-toggle="tab" data-bs-target="#age-pop" type="button" role="tab" aria-controls="age-pop" aria-selected="false">Population/age range</button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="gender" role="tabpanel" aria-labelledby="gender-tab">
+                    <canvas id="gender-ratio" width="400" height="100"></canvas>
+                  </div>
+                  <div class="tab-pane fade" id="states" role="tabpanel" aria-labelledby="states-tab">
+                    <canvas id="top-ten-pop" width="400" height="200"></canvas>
+                  </div>
+                  <div class="tab-pane fade" id="state-gender" role="tabpanel" aria-labelledby="state-gender-tab">
+                    <div class="doughnut">
+                        <canvas id="gender-per-state" width="400" height="200"></canvas>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="names" role="tabpanel" aria-labelledby="names-tab">
+                    <canvas id="name-ratio" width="400" height="200"></canvas>
+                  </div>
+                  <div class="tab-pane fade" id="age-pop" role="tabpanel" aria-labelledby="age-pop-tab">
+                    <canvas id="age-range" width="400" height="200"></canvas>
+                  </div>
+                </div>
+            </div>
+
+        </div>
 
         <script type="text/javascript" src="{% static 'stats/main.js' %}"></script>
     </body>

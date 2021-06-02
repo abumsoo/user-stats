@@ -1,0 +1,16 @@
+#fem-percent,
+#male-percent,
+#first-am,
+#first-nz,
+#last-am,
+#last-nz,
+#population,
+#female-population,
+#male-population,
+#ages {
+    display: none;
+}
+
+.doughnut {
+    height: 100px;
+}

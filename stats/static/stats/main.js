@@ -7,31 +7,26 @@ const remaining = 100 - Object.values(top_ten_json).reduce((tot, num) => tot + n
 
 var ctx = document.getElementById('top-ten-pop').getContext('2d');
 var topTenChart = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'bar',
     data: {
-        labels: Object.keys(top_ten_json).concat(["remaining"]),
+        labels: Object.keys(top_ten_json),
         datasets: [
             {
                 label: 'Top ten most populous states (%)',
-                data: Object.keys(top_ten_json).map(x => top_ten_json[x]).concat([remaining]),
-                backgroundColor:
-                    [
-                        '#00429d',
-                        '#2854a6',
-                        '#3e67ae',
-                        '#507bb7',
-                        '#618fbf',
-                        '#73a2c6',
-                        '#85b7ce',
-                        '#9acbd5',
-                        '#b1dfdb',
-                        '#cdf1e0',
-                        '#ffffe0'
-                    ],
-                hoverOffset: 1
+                data: Object.keys(top_ten_json).map(x => top_ten_json[x]),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
             },
         ]
     },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    }
 });
 
 
@@ -67,7 +62,6 @@ var myChart = new Chart(ctx, {
                 stacked: true,
             },
         },
-        indexAxis: 'y',
     }
 });
 
@@ -75,32 +69,35 @@ ctx = document.getElementById('gender-ratio').getContext('2d');
 var genderRatio = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Total"],
+        labels: ["Female", "Male"],
         datasets: [{
-            label: 'Female (%)',
-            data: [Number(document.getElementById('fem-percent').textContent)],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            label: "Percentage",
+            data:
+                [
+                    Number(document.getElementById('fem-percent').textContent),
+                    Number(document.getElementById('male-percent').textContent),
+                ],
+            backgroundColor:
+                [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 132, 132, 0.2)',
+                ],
+            borderColor:
+                [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 132, 132, 1)',
+                ],
             borderWidth: 1
         },
-        {
-            label: 'Male (%)',
-            data: [Number(document.getElementById('male-percent').textContent)],
-            backgroundColor: 'rgba(255, 132, 132, 0.2)',
-            borderColor: 'rgba(255, 132, 132, 1)',
-            borderWidth: 1
-        }
         ]
     },
     options: {
         scales: {
             y: {
                 beginAtZero: true,
-                stacked: true,
             },
             x: {
                 max: 100,
-                stacked: true,
             },
         },
         indexAxis: 'y',
@@ -142,8 +139,16 @@ var nameRatio = new Chart(ctx, {
                 Number(document.getElementById('first-am').textContent),
                 Number(document.getElementById('last-am').textContent),
             ],
-            backgroundColor: ['blue', 'blue'],
-            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor:
+                [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                ],
+            borderColor:
+                [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                ],
             borderWidth: 1,
             stack: 'Stack 0',
         },
@@ -153,8 +158,16 @@ var nameRatio = new Chart(ctx, {
                 Number(document.getElementById('first-nz').textContent),
                 Number(document.getElementById('last-nz').textContent),
             ],
-            backgroundColor: ['purple', 'purple'],
-            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor:
+                [
+                    'rgba(255, 132, 132, 0.2)',
+                    'rgba(255, 132, 132, 0.2)',
+                ],
+            borderColor:
+                [
+                    'rgba(255, 132, 132, 1)',
+                    'rgba(255, 132, 132, 1)',
+                ],
             borderWidth: 1,
             stack: 'Stack 1',
         },
