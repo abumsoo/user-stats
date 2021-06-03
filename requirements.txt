@@ -2,3 +2,5 @@ dict2xml
 Django
 django-heroku
 djangorestframework
+gunicorn
+whitenoise
