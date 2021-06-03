@@ -116,7 +116,10 @@ def all_stats(counts, total):
         top_ten, counts["male_population"], counts["states"]
     )
 
-    age_range = list(map(lambda x: round(x / total * 100, 2), counts["age_range"]))
+    ranges = ["0-20", "21-40", "41-60", "61-80", "81-100", "100+"]
+    age_range = dict(
+        zip(ranges, list(map(lambda x: round(x / total * 100, 2), counts["age_range"])))
+    )
 
     return {
         "female_percent": female_percent,

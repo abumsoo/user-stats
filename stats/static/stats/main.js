@@ -108,10 +108,10 @@ ctx = document.getElementById('age-range').getContext('2d');
 var ageRange = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["0-20", "21-40", "41-60", "61-80", "81-100", "100+"],
+        labels: Object.keys(ages),
         datasets: [{
             label: 'Population by age',
-            data: ages,
+            data: Object.keys(ages).map(x => ages[x]),
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1
