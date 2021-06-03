@@ -8,7 +8,6 @@ django-heroku
 djangorestframework
 importlib-metadata
 mypy-extensions
-pathspec
 pkg-resources
 python-dateutil
 pytz
