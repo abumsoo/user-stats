@@ -1,13 +1,11 @@
 appdirs
 asgiref
-black
 click
 dict2xml
 Django
 django-heroku
 djangorestframework
 importlib-metadata
-mypy-extensions
 pkg-resources
 python-dateutil
 pytz
