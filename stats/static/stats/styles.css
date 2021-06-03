@@ -7,7 +7,8 @@
 #population,
 #female-population,
 #male-population,
-#ages {
+#ages,
+#dobs {
     display: none;
 }
 

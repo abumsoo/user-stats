@@ -32,6 +32,7 @@ def index(request):
                 "female_per_state": json.dumps(stats_json["female_per_state"]),
                 "male_per_state": json.dumps(stats_json["male_per_state"]),
                 "age_range": json.dumps(stats_json["age_range"]),
+                "birthdays": json.dumps(stats_json["birthdays"]),
             },
         )
     return render(request, "stats/index.html")

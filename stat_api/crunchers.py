@@ -13,6 +13,7 @@ def get_counts(data_json):
         "female_population": {},
         "male_population": {},
         "age_range": [0] * 6,
+        "birthdays": {},
     }
     for p in data_json["results"]:
         state = p["location"]["state"]
@@ -57,6 +58,18 @@ def get_counts(data_json):
             counts["age_range"][4] += 1
         else:
             counts["age_range"][5] += 1
+
+        mmdd = p["dob"]["date"].split("T")[0].split("-")[1:]
+        month = mmdd[0]
+        day = mmdd[1]
+        if month in counts["birthdays"]:
+            if day in counts["birthdays"][month]:
+                counts["birthdays"][month][day] += 1
+            else:
+                counts["birthdays"][month][day] = 1
+        else:
+            counts["birthdays"][month] = {}
+            counts["birthdays"][month][day] = 1
 
     return counts
 
@@ -132,4 +145,5 @@ def all_stats(counts, total):
         "female_per_state": females_in_top_ten,
         "male_per_state": males_in_top_ten,
         "age_range": age_range,
+        "birthdays": counts["birthdays"],
     }

@@ -13,11 +13,11 @@
     </head>
     <body>
         <div class="container">
-            <nav class="navbar navbar-light bg-light">
-                <div class="container-fluid">
-                    <span class="navbar-brand mb-0 h1">User stats</span>
-                </div>
-            </nav>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">User stats</span>
+            </div>
+        </nav>
             <div class="row">
                 <form action="{% url 'index' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -43,6 +43,7 @@
                 <div id="female-population">{{ female_per_state }}</div>
                 <div id="male-population">{{ male_per_state }}</div>
                 <div id="ages">{{ age_range }}</div>
+                <div id="dobs">{{ birthdays }}</div>
             </div>
 
             <br>
@@ -63,6 +64,9 @@
                   <li class="nav-item" role="presentation">
                     <button class="nav-link" id="age-pop-tab" data-bs-toggle="tab" data-bs-target="#age-pop" type="button" role="tab" aria-controls="age-pop" aria-selected="false">Population/age range</button>
                   </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="dob-tab" data-bs-toggle="tab" data-bs-target="#dob" type="button" role="tab" aria-controls="dob" aria-selected="false">Birthday distribution</button>
+                  </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="gender" role="tabpanel" aria-labelledby="gender-tab">
@@ -81,6 +85,9 @@
                   </div>
                   <div class="tab-pane fade" id="age-pop" role="tabpanel" aria-labelledby="age-pop-tab">
                     <canvas id="age-range" width="400" height="200"></canvas>
+                  </div>
+                  <div class="tab-pane fade" id="dob" role="tabpanel" aria-labelledby="dob-tab">
+                    <canvas id="dob-dist" width="400" height="200"></canvas>
                   </div>
                 </div>
             </div>
